@@ -3,16 +3,16 @@ repository: Git repository where your resume will be hosted, only required if yo
 # favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
 
 # Personal info
-name: Your Name
+name: Yooseung Wang
 title: Your job title
-email: Your email (optional)
-phone: Your phone number (optional)
+email: yswang17@gmail.com 
+phone: +82-010-3866-6415 
 cv   : "resume.pdf"
-#website: Your website (eg. https://google.com)(optional)
+#website: yswang0522.github.io 
 
 # Social links
 #twitter_username: jekyllrb
-github_username:  moya10
+github_username:  yswang0522
 #dribbble_username: jekyll
 #facebook_username: jekyll
 #flickr_username: jekyll
@@ -24,7 +24,7 @@ github_username:  moya10
 #googleplus_username: +jekyll
 
 # About Section
-# about_title: About Me (Use this to override about section title)
+# about_title: About Me
 about_profile_image: images/profile.jpg
 about_content: | # this will include new lines to allow paragraphs
   Write an awesome description about yourself here, this supports markdown, so you can add links and highlight things <mark>like this</mark>.
