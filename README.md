@@ -1,122 +1,65 @@
-# al-folio
+# Awesome-CV Second Assignment
+[View Site](https://moya10.github.io/awesome-cv/)
 
-[![build status](https://travis-ci.org/alshedivat/al-folio.svg?branch=master)](https://travis-ci.org/alshedivat/al-folio)
-[![demo](https://img.shields.io/badge/theme-demo-brightgreen.svg)](https://alshedivat.github.io/al-folio/)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/alshedivat/al-folio/blob/master/LICENSE)
-[![gitter](https://badges.gitter.im/alshedivat/al-folio.svg)](https://gitter.im/alshedivat/al-folio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+## Installation & setup guide
+This template is designed to be hosted using GitHub pages and so that's what these instructions will cover. If you plan on hosting it seperately then there might be some extra steps that we wont cover.
 
-A simple and clean [Jekyll](https://jekyllrb.com/) theme for academics.
+Before starting it might be useful to familiarise yourself with [Jekyll](https://jekyllrb.com/docs/home/), [Markdown](https://www.markdownguide.org/getting-started) and [GitHub pages](https://pages.github.com/).
 
-[![Screenshot](assets/img/full-screenshot.png)](https://alshedivat.github.io/al-folio/)
 
-Originally, **al-folio** was based on the [\*folio theme](https://github.com/bogoli/-folio) (published by [Lia Bogoev](http://liabogoev.com) and under the MIT license).
-Since then, it got a full re-write of the styles and many additional cool features.
-The emphasis is on whitespace, transparency, and academic usage: [theme demo](https://alshedivat.github.io/al-folio/).
+## Running locally
 
-## Getting started
+Before you start make sure you have *Ruby* and the gems for *Jekyll* installed locally. You can find out how to do that [here](https://jekyllrb.com/docs/installation/).
 
-For more about how to use Jekyll, check out [this tutorial](https://www.taniarascia.com/make-a-static-website-with-jekyll/).
-Why Jekyll? Read this [blog post](https://karpathy.github.io/2014/07/01/switching-to-jekyll/)!
+1. Clone your resume repository locally *(if you haven't already)*
+2. `cd [your-repository-name]`
+3. `bundle install`
+4. `bundle exec jekyll serve`
+5. Open your browser to `http://localhost:4000`
 
-### Installation
+Any changes you make will automatically build and you will be able to see these by refreshing your browser.
 
-Assuming you have [Ruby](https://www.ruby-lang.org/en/downloads/) and [Bundler](https://bundler.io/) installed on your system (*hint: for ease of managing ruby gems, consider using [rbenv](https://github.com/rbenv/rbenv)*), first fork the theme from `github.com:alshedivat/al-folio` to `github.com:<your-username>/<your-repo-name>` and do the following:
+*Note: You will need to re-run `bundle exec jekyll serve` to see changes made in `_config.yml`.*
 
-```bash
-$ git clone git@github.com:<your-username>/<your-repo-name>.git
-$ cd <your-repo-name>
-$ bundle install
-$ bundle exec jekyll serve
-```
+## LaTex - CV
 
-Now, feel free to customize the theme however you like (don't forget to change the name!).
-After you are done, **commit** your final changes.
-Now, you can deploy your website to [GitHub Pages](https://pages.github.com/) by running the deploy script:
+### Locally
 
-```bash
-$ ./bin/deploy [--user]
-```
-By default, the script uses the `master` branch for the source code and deploys the webpage to `gh-pages`.
-The optional flag `--user` tells it to deploy to `master` and use `source` for the source code instead.
-Using `master` for deployment is a convention for [user and organization pages](https://help.github.com/articles/user-organization-and-project-pages/).
+Before you start make sure you have *pandoc* [here](https://pandoc.org/installing.html) and *MikTeX* [here](https://miktex.org/download) installed in your computer.
 
-**Note:** when deploying your user or organization page, make sure the `_config.yml` has `url` and `baseurl` fields as follows.
+Then put inside makefile the code below:
 
-```
-url: # should be empty
-baseurl:  # should be empty
-```
+`TEX = pandoc details.yml `
 
-### Usage
+`src = template.tex`
 
-Note that `_pages/about.md` is built to index.html in the published site. There is therefore no need to have a separate index page for the project. If an index page does exist in the root directory then this will prevent `_pages/about.md` from being added to the built site.
+`FLAGS =`
 
-## Features
+`resume.tex : $(src)`
 
-#### Ergonomic Publications
+`	$(TEX) $(filter-out $<,$^ ) -o $@ --template=$< $(FLAGS)`
 
-Your publications page is generated automatically from your BibTex bibliography.
-Simply edit `_bibliography/papers.bib`.
-You can also add new `*.bib` files and customize the look of your publications however you like by editing `_pages/publications.md`.
+` .PHONY: clean`
 
-Keep meta-information about your co-authors in `_data/coauthors.yml` and Jekyll will insert links to their webpages automatically.
+`clean :`
 
-#### Collections
-This Jekyll theme implements collections to let you break up your work into categories.
-The example is divided into news and projects, but easily revamp this into apps, short stories, courses, or whatever your creative work is.
+`rm resume.tex`
+  
+This will create the *resume.tex* file. Run it locally to produce the *resume.pdf*.
 
-> To do this, edit the collections in the `_config.yml` file, create a corresponding folder, and create a landing page for your collection, similar to `_pages/projects.md`.
+In *_config.yml* add the cv option and a link to download the *resume.pdf* file.
 
-Two different layouts are included: the blog layout, for a list of detailed descriptive list of entries, and the projects layout.
-The projects layout overlays a descriptive hoverover on a background image.
-If no image is provided, the square is auto-filled with the chosen theme color.
-Thumbnail sizing is not necessary, as the grid crops images perfectly.
+## Upload
 
-#### Theming
-Six beautiful theme colors have been selected to choose from.
-The default is purple, but quickly change it by editing `$theme-color` variable in the `_sass/variables.scss` file (line 72).
-Other color variables are listed there, as well.
+Upload the whole .git project in your repository and create the *gh-pages* branch.
 
-#### Photos
-Photo formatting is made simple using rows of a 3-column system.
-Make photos 1/3, 2/3, or full width.
-Easily create beautiful grids within your blog posts and projects pages:
 
-<p align="center">
-  <a href="https://alshedivat.github.io/al-folio/projects/1_project/">
-    <img src="assets/img/photos-screenshot.png" width="75%">
-  </a>
-</p>
+## Continuous Integration
 
-#### Code Highlighting
-This theme implements Jekyll's built in code syntax highlighting with Pygments.
-Just use the liquid tags `{% highlight python %}` and `{% endhighlight %}` to delineate your code:
+To set up Travis CI, create .travis.yml file in your repository:
 
-<p align="center">
-  <a href="https://alshedivat.github.io/al-folio/blog/2015/code/">
-    <img src="assets/img/code-screenshot.png" width="75%">
-  </a>
-</p>
+See Trvais CI build output 
 
-#### Social media previews
-The al-folio theme optionally supports preview images on social media.
-To enable this functionality you will need to set `serve_og_meta` to `true` in
-your `_config.yml`. Once you have done so, all your site's pages will include
-Open Graph data in the HTML head element.
+link to [build](https://travis-ci.com/moya10/awesome-cv)
 
-You will then need to configure what image to display in your site's social
-media previews. This can be configured on a per-page basis, by setting the
-`og_image` page variable. If for an individual page this variable is not set,
-then the theme will fall back to a site-wide `og_image` variable, configurable
-in your `_config.yml`. In both the page-specific and site-wide cases, the
-`og_image` variable needs to hold the URL for the image you wish to display in
-social media previews.
 
-## Contributing
-
-Feel free to contribute new features and theme improvements by sending a pull request.
-Style improvements and bug fixes are especially welcome.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
